@@ -1,9 +1,12 @@
-import HeaderComponent from "@/app/_components/header/header";
+import ProductListComponent from "@/app/_components/product-list/product-list";
 
-export default function Home() {
+const HomePage = () => {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-
-    </div>
-  );
+      <main className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900">Products</h2>
+          <ProductListComponent/>
+      </main>
+  )
 }
+
+export default HomePage;

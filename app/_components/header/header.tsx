@@ -7,11 +7,12 @@ import {
 } from "@/app/_components/navigation-menu/navigation-menu";
 import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
+import {CATEGORY_LABELS} from "@/app/_constants/categories";
 
 const HeaderComponent = () => {
     return (
         <header className="sticky top-0 z-50 w-full border-border/40 bg-background/70 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-            <div className="w-full mx-auto flex h-14 max-w-[900px] items-center justify-between">
+            <div className="mx-auto flex h-14 max-w-2xl px-4 sm:px-6 lg:px-8 lg:max-w-7xl items-center justify-between">
                 <div className="flex items-center gap-4">
                     <Link href="/">
                         <svg width="120" height="20" viewBox="0 0 90 10" fill="none"
@@ -57,41 +58,22 @@ const HeaderComponent = () => {
                     <nav>
                         <NavigationMenu>
                             <NavigationMenuList>
-                                <NavigationMenuItem>
-                                    <Link href="/docs" legacyBehavior passHref>
-                                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                            Men's clothing
-                                        </NavigationMenuLink>
-                                    </Link>
-                                </NavigationMenuItem>
-                                <NavigationMenuItem>
-                                    <Link href="/docs" legacyBehavior passHref>
-                                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                            Women's clothing
-                                        </NavigationMenuLink>
-                                    </Link>
-                                </NavigationMenuItem>
-                                <NavigationMenuItem>
-                                    <Link href="/docs" legacyBehavior passHref>
-                                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                            Jewelery
-                                        </NavigationMenuLink>
-                                    </Link>
-                                </NavigationMenuItem>
-                                <NavigationMenuItem>
-                                    <Link href="/docs" legacyBehavior passHref>
-                                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                            Electronics
-                                        </NavigationMenuLink>
-                                    </Link>
-                                </NavigationMenuItem>
+                                {Object.values(CATEGORY_LABELS).map((label, index) => (
+                                    <NavigationMenuItem key={index}>
+                                        <Link href="/docs" legacyBehavior passHref>
+                                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                                {label}
+                                            </NavigationMenuLink>
+                                        </Link>
+                                    </NavigationMenuItem>
+                                ))}
                             </NavigationMenuList>
                         </NavigationMenu>
                     </nav>
                 </div>
                 <div className="flex items-center gap-1">
                     <Link href="/cart">
-                        <ShoppingCart className="cursor-pointer hover:opacity-70"/>
+                        <ShoppingCart size={20} className="cursor-pointer hover:opacity-70"/>
                     </Link>
                 </div>
 
