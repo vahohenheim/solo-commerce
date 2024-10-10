@@ -1,14 +1,16 @@
 import { FakeStoreApi } from '@/app/_api/fake-store/fake-store';
-import { ProductDetailComponentProps } from '@/app/_components/product-detail/product-detail.model';
+import { ProductDetailComponentProps } from '@/app/product/[id]/_components/product-detail/product-detail.model';
 import { notFound } from 'next/navigation';
 import { CATEGORY_LABELS } from '@/app/_constants/categories';
-import ProductReviewComponent from '@/app/_components/product-review/product-review';
-import { Button } from '@/app/_components/button/button';
+import ProductReviewComponent from '@/app/product/[id]/_components/product-review/product-review';
 import { NumberHelpers } from '@/app/_helpers/number';
 import Image from 'next/image';
 import ProductListComponent from '@/app/_components/product-list/product-list';
+import ProductActionComponent from '@/app/product/[id]/_components/product-action/product-action';
 
 const ProductDetailComponent = async ({ id }: ProductDetailComponentProps) => {
+    // Any cache invalidation is defined here. It's going to be a problem when the product data changed.
+    // We can make a cache revalidation with a webhook from the api and an endpoint in this Next.js project.
     const product = await FakeStoreApi.fetchProduct(id);
 
     if (!product) {
@@ -41,7 +43,7 @@ const ProductDetailComponent = async ({ id }: ProductDetailComponentProps) => {
                     height={800}
                     src={product.image}
                     alt={product.title}
-                    className="col-span-3 h-[300px] w-full object-contain object-center sm:h-[400px] md:h-[600px]"
+                    className="col-span-3 h-[300px] w-full object-contain object-center p-4 sm:h-[400px] md:h-[600px]"
                 />
                 <div className="col-span-2 mt-4 lg:mt-0">
                     <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product.title}</h1>
@@ -56,9 +58,7 @@ const ProductDetailComponent = async ({ id }: ProductDetailComponentProps) => {
                         <ProductReviewComponent rate={product.rating.rate} count={product.rating.count} />
                     </div>
 
-                    <div className="mt-10">
-                        <Button className="w-full">Add to bag</Button>
-                    </div>
+                    <ProductActionComponent productId={product.id} />
                 </div>
             </div>
             <h2 className="mt-4 text-2xl font-bold tracking-tight text-gray-900">Related Products</h2>

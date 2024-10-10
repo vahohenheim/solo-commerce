@@ -1,3 +1,3 @@
 export type ProductDetailComponentProps = {
-    id: string;
+    id: number;
 };

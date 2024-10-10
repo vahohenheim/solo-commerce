@@ -1,7 +1,7 @@
-import {FetchApiOptions} from "@/app/_api/fetch/fetch.model";
+import { FetchApiOptions } from '@/app/_api/fetch/fetch.model';
 
 export const FETCH_API_DEFAULT_PARAMS: FetchApiOptions = {
-    retries: 20,
+    retries: 1,
     everyMs: 1500
 };
 

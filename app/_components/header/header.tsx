@@ -11,7 +11,7 @@ import { CATEGORY_LABELS } from '@/app/_constants/categories';
 
 const HeaderComponent = () => {
     return (
-        <header className="sticky top-0 z-50 w-full border-border/40 bg-background/70 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+        <header className="sticky top-0 z-50 w-full border-border/40 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/90">
             <div className="mx-auto flex h-14 max-w-2xl items-center justify-between px-4 sm:px-6 md:max-w-5xl lg:px-8">
                 <div className="flex items-center gap-4">
                     <Link href="/">

@@ -6,11 +6,8 @@ export class FakeStoreApi {
     static BASEPATH = 'https://fakestoreapi.com/';
 
     static fetchProducts = async (category?: FakeStoreCategory, limit?: number): Promise<Array<FakeStoreProduct> | null> => {
-        const endpoint = '/products';
-
-        // TODO: replace by right endpoint
-        //const url = `${FakeStoreApi.BASEPATH}${endpoint}`;
-        const url = 'http://localhost:3000/fake-store/products.json';
+        const endpoint = 'products';
+        const url = `${FakeStoreApi.BASEPATH}${endpoint}`;
 
         const result = await FetchApi.get<Array<FakeStoreProduct>>(url);
         const products = result.data;
@@ -34,12 +31,9 @@ export class FakeStoreApi {
         return products;
     };
 
-    static fetchProduct = async (id: string): Promise<FakeStoreProduct | null> => {
-        const endpoint = `/products/${id}`;
-
-        // TODO: replace by right endpoint
-        //const url = `${FakeStoreApi.BASEPATH}${endpoint}`;
-        const url = 'http://localhost:3000/fake-store/1.json';
+    static fetchProduct = async (id: number): Promise<FakeStoreProduct | null> => {
+        const endpoint = `products/${id}`;
+        const url = `${FakeStoreApi.BASEPATH}${endpoint}`;
 
         const result = await FetchApi.get<FakeStoreProduct>(url);
         return result.data;

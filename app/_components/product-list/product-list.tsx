@@ -3,7 +3,11 @@ import { FakeStoreApi } from '@/app/_api/fake-store/fake-store';
 import { ProductListComponentProps } from '@/app/_components/product-list/product-list.model';
 
 const ErrorProductListComponent = () => {
-    return <div>Oops, something went wrong! We&apos;re sorry, but there seems to be a problem on our end. Please try again later.</div>;
+    return (
+        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            <p>Oops, something went wrong! We&apos;re sorry, but there seems to be a problem on our end. Please try again later.</p>
+        </div>
+    );
 };
 
 const EmptyProductListComponent = () => {
