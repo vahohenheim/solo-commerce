@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) project about an ecommerce website.
+
+This project use :
+
+- Shadcn/ui as Component library (by downloading components)
+- Radix-ui for accessibility
+- Redux toolkit for use a store
 
 ## Getting Started
+
+### Setup
+
+use node version > 20.
+
+### Environment variable
+
+Copy and paste file named `.env.example` and rename it `.env`.
+
+Add value to this variable.
+
+**Spoiler** It's : https://fakestoreapi.com
+
+### Development
 
 First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application alive.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+First, build the app :
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+Then, run the Next.js server :
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Way to improve
 
-## Deploy on Vercel
+### Session Persistance
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This application use `@redux/toolkit` and `localStorage` for persist user session and his cart.
+In an ideal world, we can prefer store the session into a database, for know which articles user added to his cart, and
+make marketing communication on it, for example. The easier way is to use Postgresql (provide by vercel), use Prisma as
+ORM, and use server actions for manage interaction between peristance management and user interaction.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Improve API
+
+In the API classes for consume API, we must add methods to filter products fetching, and this is an API responsibility.
+We have also a problem about categories. We can fetch by category and the API don't expose `id` for apply logic on this
+property (filter, translation, add a category page).
+
+### Product cache
+
+Product page and listing are always cache. Any cache stategy is defined here. It's going to be a problem when the
+product data changed.
+We can make a cache revalidation with a webhook from the api and an endpoint in this Next.js project.
+
+### Rehydration problem in cart page when user reload the page
+
+The Redux toolkit usage create a problem of rehydration when the user reload the `/cart` page, with products in his
+cart, because the page generated from server doesn't have products from localStorage, and i don't find solutions to
+solve it in the delay.
+
+### Improve cart integrity
+
+In this application we can add all product we want, also unexisting product. For improve card integrity we can improve
+the assessors to check if product exist into the API, and add it only of exist.

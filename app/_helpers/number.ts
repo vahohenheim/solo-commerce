@@ -20,7 +20,7 @@ export class NumberHelpers {
         maximumFractionDigits: 2
     };
 
-    static format(num: number, options: Intl.NumberFormatOptions = {}, locales?: string | Array<string>) {
+    static format(num: number, options: Intl.NumberFormatOptions = {}, locales: string | Array<string> = 'en') {
         if (typeof num !== 'number') {
             LogHelpers.warning('NumberHelpers', `Failed to format number because ${num} is not a number`);
             return '';

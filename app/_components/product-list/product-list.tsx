@@ -14,8 +14,8 @@ const EmptyProductListComponent = () => {
     return <div>Any product</div>;
 };
 
-const ProductListComponent = async ({ category, limit }: ProductListComponentProps) => {
-    const products = await FakeStoreApi.fetchProducts(category, limit);
+const ProductListComponent = async ({ category, limit, removedProducts }: ProductListComponentProps) => {
+    const products = await FakeStoreApi.fetchProducts(category, removedProducts, limit);
     const hasError = !products || !Array.isArray(products);
     const isEmpty = products?.length === 0;
 

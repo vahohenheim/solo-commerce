@@ -2,7 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { CartProductsState, CartState } from '@/app/_store/features/cart/cart.model';
 
-const initialState: CartState = {
+export const initialState: CartState = {
     products: {}
 };
 

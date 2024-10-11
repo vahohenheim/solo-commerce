@@ -1,33 +1,17 @@
-import { FakeStoreApi } from '@/app/_api/fake-store/fake-store';
 import { CartItemComponentProps } from '@/app/cart/_components/cart-item/cart-item.model';
 import Image from 'next/image';
 import { NumberHelpers } from '@/app/_helpers/number';
 import Link from 'next/link';
 import CartItemActionsComponent from '@/app/cart/_components/cart-item/_components/cart-item-actions/cart-item-actions';
-import { FakeStoreProduct } from '@/app/_api/fake-store/fake-store.model';
-import { useEffect, useState } from 'react';
 import CartItemSkeletonComponent from '@/app/cart/_components/cart-item/cart-item.skeleton';
+import { useCartItemData } from '@/app/cart/_components/cart-item/cart-item.hook';
 
 const ErrorCartItemComponent = () => {
     return <div>Something went wrong, this product doesn&#39;t exist.</div>;
 };
 
 const CartItemComponent = ({ productId, quantity }: CartItemComponentProps) => {
-    const [loading, setLoading] = useState(false);
-    const [loaded, setLoaded] = useState(false);
-    const [product, setProduct] = useState<FakeStoreProduct | null>(null);
-
-    const fetchProduct = async () => {
-        const product = await FakeStoreApi.fetchProduct(productId);
-        setProduct(product);
-    };
-
-    useEffect(() => {
-        setLoading(true);
-        fetchProduct();
-        setLoading(false);
-        setLoaded(true);
-    }, []);
+    const [product, loading, loaded] = useCartItemData(productId);
 
     if (loading || !loaded) {
         return <CartItemSkeletonComponent />;
@@ -45,7 +29,7 @@ const CartItemComponent = ({ productId, quantity }: CartItemComponentProps) => {
                     height={200}
                     src={product.image}
                     alt={product.title}
-                    className="size-[200px] shrink-0 overflow-hidden rounded-md border border-gray-200 object-contain object-center p-4 transition-opacity hover:opacity-80"
+                    className="size-[200px] min-w-[200px] shrink-0 grow overflow-hidden rounded-md border border-gray-200 object-contain object-center p-4 transition-opacity hover:opacity-80"
                 />
             </Link>
 
